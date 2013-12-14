@@ -7,19 +7,10 @@
   <!-- <link rel="stylesheet" href="assets/normalize.css"> -->
 </head>
 <body>
-  <script type="text/html" id="formTemplate">
-    <form id="artist-form">
-      <input id="new-artist" placeholder="What needs to be listened?" type="text" />
-        <span class="ui-tooltip-top" style="display:none;">Press Enter to save</span>
-      </input>
-    </form>
-  </script>
   <script type="text/template" id="item-template">
-    <li class="artist-item">
       <input class="toggle" type="checkbox" <%= listened ? 'checked' : '' %>>
-      <label><%- name %></label>
+      <label><%= name %></label>
       <span class="destroy">✖</span>
-    </li>
   </script>
   <script type="text/template" id="stats-template">
     <span class="artist-count">
@@ -56,10 +47,10 @@
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.0/backbone.localStorage-min.js"></script>
+  <!--<script type="text/javascript" src="backbone-localstorage.js"></script> -->
 
   <script type="text/javascript" src="js/models/artist.js"></script>
   <script type="text/javascript" src="js/collections/artists.js"></script>
-  <script type="text/javascript" src="js/views/artist_form_view.js"></script>
   <script type="text/javascript" src="js/views/artist_list_view.js"></script>
   <script type="text/javascript" src="js/views/artist_item_view.js"></script>
   <script type="text/javascript" src="js/views/fetch_artists_view.js"></script>

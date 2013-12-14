@@ -1,7 +1,7 @@
 var Artists = Backbone.Collection.extend({
   model: Artist,
 
-  localStorage: new Store('artists'),
+  localStorage: new Backbone.LocalStorage('artists'),
 
   listened: function () {
     return this.filter(function (artist) {

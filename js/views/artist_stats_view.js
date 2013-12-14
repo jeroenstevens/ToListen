@@ -9,14 +9,11 @@ var ArtistStatsView = Backbone.View.extend({
     // artists_stats.on("add", this.render, this);
     // artists_stats.on("remove", this.render, this);
     this.render();
-    console.log('artist_stats_view_initialize');
   },
   events: {
     "click #clear-listened": "clearListened"
   },
   render: function () {
-    console.log('artist_stats_view_render');
-    console.log(this);
     var listenedCount = artists.listened().length;
     var remainingCount = artists.unheard().length;
     var content = this.template({listened: listenedCount, remaining: remainingCount});

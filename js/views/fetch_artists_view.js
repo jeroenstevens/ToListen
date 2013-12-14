@@ -67,9 +67,10 @@ var FetchArtistsView = Backbone.View.extend({
 
   addToFavorite: function (artist) {
     var artist_name = (artist["currentTarget"]["textContent"]);
-    //$(artist['currentTarget']).toggleClass('favorited');
     if(artists.where({name: artist_name}).length == 0){
-      artists.create({name: artist_name});
+      var artist_model = new Artist({name: artist_name});
+      artists.add(artist_model);
+      artist_model.save();
     }
   },
 

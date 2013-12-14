@@ -64,7 +64,7 @@ rect {
   margin-left:1em;
 }
 
-#artist-list{
+.artist-list{
   margin:4em 0 0 1em;
   position:fixed;
   list-style:none;
