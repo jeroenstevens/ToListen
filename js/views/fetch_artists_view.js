@@ -1,92 +1,78 @@
 var FetchArtistsView = Backbone.View.extend({
   el: $('body'),
-  // template: _.template("\
-  //   <li class='artist'>\
-  //     <div id='artist-name'>"+artist['name']+"</div>\
-  //     <img src="+artist['image'][3]['#text']+" id='artist-img' class='large-3'></img>\
-  //   </li>\
-  // "),
+  artist_template: _.template($("#artist-template").html()),
+  url: url = "http://ws.audioscrobbler.com/2.0/?api_key=f90b2e1d432ddfeee9b30524aeedd6d7&format=json", // Last.fm API end-point
 
   events: {
-    'keypress input': 'processKey',
+    'keypress input': 'getRandomArtist',
     'click .artist': 'addToFavorite'
   },
 
   initialize: function () {
-    _.bindAll(this, 'render', 'getLatestArtist', 'addToFavorite'// , 'getSimilar'
-    );
     this.render();
   },
 
   render: function () {
-    url = "http://ws.audioscrobbler.com/2.0/?method=chart.gettopartists&api_key=f90b2e1d432ddfeee9b30524aeedd6d7&format=json";
+    this.getTopArtist();
+  },
+
+  getTopArtist: function () {
+    var self = this;
+    var method = "chart.gettopartists"
+    url = url +"&method="+ method
     $.getJSON(url, function(data){
-      $('body').append("<ul class='row' id='list'></ul>");
+      $('body').append("<ul class='row top-artist-list'></ul>");
       $.each(data.artists.artist, function(i, artist){
-        console.log(artist['name']);
-        $('#list').append("<li class='artist'><div id='artist-name'>"+artist['name']+"</div><img src="+artist['image'][3]['#text']+" id='artist-img' class='large-3'></img></li>").hide().fadeIn(300);
+        var content = self.artist_template({artist: artist, playcount: false, main: false});
+        $('.top-artist-list').append(content);
       });
     });
   },
 
-  processKey: function(e) {
-    if(e.which === 13){
-      this.getLatestArtist();
+  getRandomArtist: function (e) {
+    if(e.which == 13){ // Enter key
+      self = this;
+      query = $('.searchfield').val()
+      method = "library.getartists"
+      url = url +"&method="+ method +"&user=" + query;
+      $.getJSON(url, function(data){
+
+        var artists = data.artists.artist                       // Get all artists from the library
+        var artist = artists[Math.floor(Math.random() * 40)];   // Pick a random artist
+
+        var content = self.artist_template({artist: artist, playcount: true, main: true});
+        $('.main-artist').remove();
+        $('.top-artist-list').remove();
+        self.$el.append(content);
+        $('.main-artist').css("display", "block");
+
+        self.getSimilarArtist(artist);
+      });
     }
   },
 
-  getLatestArtist: function () {
-    query = $('.searchfield').val()
-    method = "user.getrecenttracks"
-    url = "http://ws.audioscrobbler.com/2.0/?api_key=f90b2e1d432ddfeee9b30524aeedd6d7&format=json"+"&method="+ method +"&user=" + query;
-    $.getJSON(url, function(data){
-      var latesttracks = data.recenttracks.track
-      var random_artist = latesttracks[Math.floor(Math.random() * latesttracks.length)];
-      $('#artist-img').attr({src: random_artist['image'][3]['#text']});
-      $('#artist-name').text(random_artist['artist']['#text'] +" - "+ random_artist['name']);
-      $('#list').fadeOut(600, function(){
-         $(this).remove();
-         $('#artist').css("display", "block");
-      });
-      console.log(random_artist);
+  getSimilarArtist: function (artist) {
+    query = artist['name']
+    method = "artist.getsimilar"
+    url = url +"&method="+ method +"&artist=" + query;
 
-      query = random_artist['artist']['#text']
-      console.log(query);
-      method = "artist.getsimilar"
-      url = "http://ws.audioscrobbler.com/2.0/?api_key=f90b2e1d432ddfeee9b30524aeedd6d7&format=json"+"&method="+ method +"&artist=" + query;
-      $('#similar-list').remove();
-      $('body').append("<ul class='row' id='similar-list'></ul>")
-      $.getJSON(url, function(data){
-        $.each(data.similarartists.artist, function (i, artist){
-          console.log(artist['name']);
-          $('#similar-list').append("<li class='artist'><div id='artist-name'>"+artist['name']+"</div><img src="+artist['image'][3]['#text']+" id='artist-img' class='large-3'></img><meter value="+artist['match']+" min=0 max=1></meter></li>").hide().fadeIn(300);
-        });
+    $('.similar-list').remove();
+    $('body').append("<ul class='row similar-list'></ul>")
+    $('.heading').text('Similar Artists').addClass('push');
+
+    $.getJSON(url, function(data){
+      $.each(data.similarartists.artist, function (i, artist){
+        $('.similar-list').append(self.artist_template({artist: artist, playcount:false, main:false}));
       });
     });
   },
 
   addToFavorite: function (artist) {
     var artist_name = (artist["currentTarget"]["textContent"]);
-    if(artists.where({name: artist_name}).length == 0){
-      var artist_model = new Artist({name: artist_name});
-      artists.add(artist_model);
+    if(artists.where({name: artist_name}).length == 0){         // Add only when artist_name is unique
+      var artist_model = new Artist({name: artist_name});       // Instantiate a new Artist model
+      artists.add(artist_model);                                // Add the model to the collection(localStorage)
       artist_model.save();
     }
   },
-
-  // getSimilar: function () { // Hoe geeft ik random_artist als een variable mee na getLatestArtist
-  //   query = random_artist['artist']['#text']
-  //   console.log(query);
-  //   method = "artist.getsimilar"
-  //   url = "http://ws.audioscrobbler.com/2.0/?api_key=f90b2e1d432ddfeee9b30524aeedd6d7&format=json"+"&method="+ method +"&artist=" + query;
-  //   $('#similar-list').remove();
-  //   $('body').append("<ul class='row' id='similar-list'></ul>")
-  //   $.getJSON(url, function(data){
-  //     $.each(data.similarartists.artist, function (i, artist){
-  //       console.log(artist['name']);
-  //       $('#similar-list').append("<li class='artist'><div id='artist-name'>"+artist['name']+"</div><img src="+artist['image'][3]['#text']+" id='artist-img' class='large-3'></img><meter value="+artist['match']+" min=0 max=1></meter></li>").hide().fadeIn(300);
-  //     });
-  //   });
-  // },
 });
-  var artists_view = new FetchArtistsView();

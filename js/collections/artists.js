@@ -9,7 +9,7 @@ var Artists = Backbone.Collection.extend({
     });
   },
   unheard: function () {
-    return this.without.apply(this, this.listened() );
+    return this.without.apply(this, this.listened());
   }
 });
 

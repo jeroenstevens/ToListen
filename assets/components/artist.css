@@ -1,0 +1,54 @@
+/* main-artist */
+
+.main-artist {
+  top:2.8em;
+  left:13.7em;
+  position:fixed;
+  padding: 1em;
+  border-bottom: 0.1em #333 solid;
+  opacity:0.8;
+  display:none;
+}
+.main-artist img{
+  width:5em;
+  height:5em;
+  margin-right:1em;
+  float:left;
+}
+
+/* artist */
+
+.artist{
+  background-color: #e3e3e3;
+  width: 11.3em;
+  float: left;
+  margin: 1em 1em 0 0;
+  list-style: none;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+.artist img{
+  width:inherit;
+  height:11.3em;
+  border-top-left-radius: inherit;
+  border-top-right-radius: inherit;
+}
+
+.artist p{
+  border-bottom:0.1em solid black;
+  height:4em;
+  padding:1em;
+}
+
+.artist:nth-child(5n){
+  margin-right:0;
+}
+
+.artist:nth-child(5n+1){
+  margin-left:1em;
+}
+
+meter{
+  margin:1em;
+}

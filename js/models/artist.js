@@ -6,7 +6,7 @@ var Artist = Backbone.Model.extend({
   },
 
   toggleStatus: function () {
-    this.set({
+    this.save({
       listened: !this.get('listened') // Sets attribute on opposite value
     });
   }

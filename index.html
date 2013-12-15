@@ -1,53 +1,62 @@
 <!doctype html>
 <head>
-  <title>Backbone.js • Shufflast</title>
+  <title>To - Listen • Randomize your next artist</title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="assets/base.css">
-  <link rel="stylesheet" href="assets/foundation.css">
-  <!-- <link rel="stylesheet" href="assets/normalize.css"> -->
+  <link rel="stylesheet" href="assets/base/general.css">
+  <link rel="stylesheet" href="assets/components/artist.css">
+  <link rel="stylesheet" href="assets/components/to-listen.css">
+  <link rel="stylesheet" href="assets/base/foundation.css">
 </head>
 <body>
   <script type="text/template" id="item-template">
-      <input class="toggle" type="checkbox" <%= listened ? 'checked' : '' %>>
-      <label><%= name %></label>
-      <span class="destroy">✖</span>
+    <input class="toggle" type="checkbox" <%= listened ? 'checked' : '' %>>
+    <label><%= name %></label>
+    <span class="destroy">✖</span>
   </script>
   <script type="text/template" id="stats-template">
-    <span class="artist-count">
-      <span class="number"><%= remaining %></span>
-      <span class="word">artists</span> left.
-    </span>
-    <span class="artist-clear">
-      <a href="#" id="clear-listened">
-        Clear <span class="number-listened"><%= listened %></span>
-        listened <span class="word-listened">artists</span>
-      </a>
-    </span>
+    <div class="artist-count"><%= remaining %> artists left.</div>
+    <div class="artist-clear">
+      <a class="clear-listened">Clear <%= listened %> listened artists</a>
+    </div>
   </script>
-  <div class="fixed">
-    <nav class="top-bar">
-      <ul class="title-area">
-        <li class="name">
-          <h1><a href="#">Randomizer</a></h1>
-        </li>
-      </ul>
-      <ul class="left">
-        <div class="row">
-          <input type="search" placeholder="Last.fm Username" class="searchfield">
-        </div>
-      </ul>
-    </nav>
+  <script type="text/template" id="artist-template">
+      <% if(main == true) { %>
+        <div class="row main-artist">
+      <% } else { %>
+        <li class="artist">
+      <% } %>
+        <img src=<%= artist['image'][3]['#text']%>></img>
+        <p>
+          <%=artist['name']%>
+          <% if(playcount == true) { %>
+            Playcount: <%= artist['playcount'] %>
+          <% } %>
+        </p>
+        <% if(artist['match'] != undefined ) { %>
+          <meter value=<%=artist['match']%> min=0 max=1></meter>
+        <% } %>
+      </li>
+  </script>
+  <nav class="top-bar">
+    <ul class="title-area">
+      <li class="name">
+        <h1><a href="#">To - Listen</a></h1>
+      </li>
+    </ul>
+    <ul class="left">
+      <div class="row">
+        <input type="search" placeholder="Last.fm Username" class="searchfield">
+      </div>
+    </ul>
+  </nav>
+  <div class="to-listen">
+    <div class="heading-small">To - Listen</div>
   </div>
-  <div class="row" id="artist">
-    <img id="artist-img" class="large-3"></img>
-    <div id="artist-name"></div>
-  </div>
-  <!-- <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/foundation/5.0.2/js/foundation.min.js"></script> -->
+  <div class='heading'>Top Artists</div>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/backbone-localstorage.js/1.1.0/backbone.localStorage-min.js"></script>
-  <!--<script type="text/javascript" src="backbone-localstorage.js"></script> -->
 
   <script type="text/javascript" src="js/models/artist.js"></script>
   <script type="text/javascript" src="js/collections/artists.js"></script>

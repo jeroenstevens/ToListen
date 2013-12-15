@@ -1,11 +1,9 @@
 var ArtistItemView = Backbone.View.extend({
   template: _.template($("#item-template").html()),
   tagName: 'li',
-  className: 'artist-item',
+  className: "artist-item",
 
   initialize: function () {
-    _.bindAll(this, "render", "toggleListen", "clear");
-    this.model.bind("change:listened", this.render);
   },
   events: {
     "click :checkbox": "toggleListen",
@@ -14,18 +12,19 @@ var ArtistItemView = Backbone.View.extend({
   render: function () {
     var content = this.template(this.model.toJSON());
     this.$el.html(content);
-    this.isListened(); // Checks the listened attribute
+    this.isListened();                                  // Checks the listened attribute
     return this;
   },
   toggleListen: function () {
     this.model.toggleStatus();
+    this.$("input").parent().toggleClass("listened");   // Toggle the class when value of listened changed
   },
   clear: function () {
-    this.model.destroy(); // Remove the model Artist from the collection
-    this.remove(); // Remove the ArtistItemView
+    this.model.destroy();                               // Remove the model Artist from the collection
+    this.remove();                                      // Remove the ArtistItemView
   },
   isListened: function () {
-    if(this.model.get('listened')){
+    if(this.model.get('listened')){                     // Gives listened class to every class that is listened
       this.$("input").parent().addClass("listened");
     };
   }

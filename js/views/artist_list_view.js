@@ -1,21 +1,21 @@
 var ArtistListView = Backbone.View.extend({
-  className: "artist-list",
-  tagName: "ul",
+  className: 'artist-list',
+  tagName: 'ul',
 
   initialize: function () {
     _.bindAll(this, "render");
     this.collection.bind("add", this.render);
-    this.collection.bind("reset", this.render);
+    this.collection.bind("remove", this.render);
     this.collection.fetch();
   },
   render: function () {
-    $(this.el).empty();
-    var els = [];
+    this.$el.empty();
+    var artists = [];
     this.collection.each(function(model){
       var view = new ArtistItemView({model: model});
-      els.push(view.render().el);
+      artists.push(view.render().el);
     });
-    $(this.el).append(els);
+    this.$el.append(artists);
     return this;
   }
 });

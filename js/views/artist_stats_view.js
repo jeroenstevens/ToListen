@@ -1,17 +1,16 @@
 var ArtistStatsView = Backbone.View.extend({
-  id: "artist-stats",
+  className: "artist-stats",
   template: _.template($("#stats-template").html()),
 
   initialize: function () {
-    _.bindAll(this, "render", "clearListened");
-    // artists_stats = this.collection
-    // artists_stats.on("listened-changed", this.render, this);
-    // artists_stats.on("add", this.render, this);
-    // artists_stats.on("remove", this.render, this);
+    _.bindAll(this, "render");
+    this.collection.on("change:listened", this.render);   // Change number in template when new artist is changed
+    this.collection.on("add", this.render);               // "      "      "  "        "    "   "      "  added
+    this.collection.on("remove", this.render);            // "      "      "  "        "    "   "      "  removed
     this.render();
   },
   events: {
-    "click #clear-listened": "clearListened"
+    "click .clear-listened": "clearListened"
   },
   render: function () {
     var listenedCount = artists.listened().length;
@@ -21,7 +20,9 @@ var ArtistStatsView = Backbone.View.extend({
     return this;
   },
   clearListened: function () {
-    this.collection.remove(this.collection.listened());
-    event.preventDefault();
+    listened_artists = this.collection.listened();
+    for (var i = 0; i < listened_artists.length; i++){
+      listened_artists[i].destroy();
+    }
   }
 });

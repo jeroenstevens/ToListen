@@ -1,0 +1,42 @@
+.to-listen{
+  margin:4em 0 0 1em;
+  position:fixed;
+}
+.artist-list{
+  list-style:none;
+  margin-bottom:1em;
+}
+.artist-item{
+  margin-bottom: 0.4em;
+  border-bottom: 0.1em solid black;
+  padding: 0 0.5em 0.5em 0.5em;
+}
+.artist-item:hover label{
+  color:#999;
+}
+.artist-item label{
+  width:7em;
+  vertical-align:middle;
+}
+.toggle {
+  -webkit-appearance:none;
+  -moz-appearance:none;
+  -o-appearance:none;
+  appearance:none;
+}
+.toggle:after{
+  content:'✔';
+}
+.toggle:hover{
+  color:green;
+}
+.destroy:hover{
+  color:red;
+}
+.listened label{
+  text-decoration:line-through;
+  color:#888;
+}
+.listened .toggle{
+  color:green;
+}
