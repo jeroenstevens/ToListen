@@ -19,3 +19,10 @@ Scroll through the overview and click on an artist if you like to put it on your
 Keep expanding your music base and keep randomizing!!
 
 
+Technical information
+---------------------
+
+* Backbone application.
+* Last.fm API usage with different methods.
+* Used index.php to make it able to deploy on heroku.
+* Wanted to make a application independent from Rails.
