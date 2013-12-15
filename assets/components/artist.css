@@ -34,21 +34,17 @@
   border-top-left-radius: inherit;
   border-top-right-radius: inherit;
 }
-
 .artist p{
   border-bottom:0.1em solid black;
   height:4em;
   padding:1em;
 }
-
 .artist:nth-child(5n){
   margin-right:0;
 }
-
 .artist:nth-child(5n+1){
   margin-left:1em;
 }
-
 meter{
   margin:1em;
 }

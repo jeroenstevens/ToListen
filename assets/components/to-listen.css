@@ -25,6 +25,9 @@
   appearance:none;
 }
 .toggle:after{
+  -webkit-content:'✔';
+  -moz-content:'✔';
+  -o-content:'✔';
   content:'✔';
 }
 .toggle:hover{
