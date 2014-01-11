@@ -1,0 +1,16 @@
+<% if(main == true) { %>
+  <div class="row main-artist">
+<% } else { %>
+  <li class="artist">
+<% } %>
+  <img src=<%= artist['image'][3]['#text']%>></img>
+  <p>
+    <%= artist['name']%>
+    <% if(playcount == true) { %>
+      Playcount: <%= artist['playcount'] %>
+    <% } %>
+  </p>
+  <% if(artist['match'] != undefined ) { %>
+    <meter value=<%=artist['match']%> min=0 max=1></meter>
+  <% } %>
+</li>

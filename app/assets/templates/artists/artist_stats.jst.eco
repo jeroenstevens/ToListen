@@ -1,0 +1,4 @@
+<div class="artist-count"><%= this.remaining %> artists left.</div>
+<div class="artist-clear">
+  <a class="clear-listened">Clear <%= this.listened %> listened artists</a>
+</div>

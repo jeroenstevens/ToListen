@@ -1,0 +1,17 @@
+<nav class="top-bar">
+  <ul class="title-area">
+    <li class="name">
+      <h1><a href="#">To - Listen</a></h1>
+    </li>
+  </ul>
+  <ul class="left">
+    <div class="row">
+      <input type="search" placeholder="Last.fm Username" class="searchfield">
+    </div>
+  </ul>
+</nav>
+<%= content_tag "div", class: "to-listen", data: {artists: Artist.all} do %>
+  <div class="heading-small">To - Listen</div>
+<% end %>
+<div class='heading'>Top Artists</div>
+

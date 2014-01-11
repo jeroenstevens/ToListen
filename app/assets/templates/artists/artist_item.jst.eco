@@ -1,0 +1,3 @@
+<input class="toggle" type="checkbox" <%= listened ? 'checked' : '' %>>
+<label><%= @artist.get('name') %></label>
+<span class="destroy">✖</span>
