@@ -30692,3 +30692,5 @@ NoMethodError (undefined method `create' for nil:NilClass):
   Rendered /usr/local/rvm/gems/ruby-2.1.0-preview2/gems/actionpack-4.1.0.beta1/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (1.1ms)
   Rendered /usr/local/rvm/gems/ruby-2.1.0-preview2/gems/actionpack-4.1.0.beta1/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.1ms)
   Rendered /usr/local/rvm/gems/ruby-2.1.0-preview2/gems/actionpack-4.1.0.beta1/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (29.2ms)
+  [1m[36mActiveRecord::SchemaMigration Load (22.8ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.1ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
