@@ -7,18 +7,20 @@ class ArtistsController < ApplicationController
   end
 
   def show
+    respond_with @artist
   end
 
   def create
-    respond_with @artist.create(artist_params)
+    respond_with Artist.create(artist_params)
   end
 
   def update
-    respond_with @artist.update(artist_params)
+    render json: @artist, status: :ok if @artist.update(artist_params)
   end
 
   def destroy
-    respond_with @artist.destroy
+    #respond_with @artist.destroy
+    render json: nil, status: :ok if @artist.destroy
   end
 
 private
