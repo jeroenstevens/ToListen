@@ -5,10 +5,8 @@ var Artists = Backbone.Collection.extend({
   //localStorage: new Backbone.LocalStorage('artists'),
 
   listened: function () {
-    return this.filter(function (artist) {
-      return artist.get('listened');
+    return this.filter(function (artist) { // geeft de hele array trg
+      return artist.get('listened'); // geeft de objecten binnen de array trg
     });
   }
 });
-
-//artists = new Artists();

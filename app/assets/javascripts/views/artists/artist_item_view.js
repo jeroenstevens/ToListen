@@ -4,28 +4,29 @@ var ArtistItemView = Backbone.View.extend({
   className: "artist-item",
 
   initialize: function () {
+    this.model.on('change', this.toggleStrikethrough, this);
   },
   events: {
-    "click :checkbox": "toggleListen",
+    "click :checkbox": "toggleListened",
     "click .destroy": "clear"
   },
   render: function () {
     var content = this.template({artist: this.model});
     this.$el.html(content);
-    this.isListened();                                  // Checks the listened attribute
+
+    if(this.model.get('listened')){
+      this.toggleStrikethrough();
+    };
+
     return this;
   },
-  toggleListen: function () {
-    this.model.toggleStatus();
-    this.$("input").parent().toggleClass("listened");   // Toggle the class when value of listened changed
+  toggleStrikethrough: function () {
+    this.$("input").parent().toggleClass("listened");
+  },
+  toggleListened: function () {
+    this.model.toggleListened();
   },
   clear: function () {
-    this.model.destroy();                               // Remove the model Artist from the collection
-    this.remove();                                      // Remove the ArtistItemView
-  },
-  isListened: function () {
-    if(this.model.get('listened')){                     // Gives listened class to every class that is listened
-      this.$("input").parent().addClass("listened");
-    };
+    this.model.destroy();
   }
 });

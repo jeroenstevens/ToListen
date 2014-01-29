@@ -5,4 +5,6 @@ ToListen::Application.routes.draw do
 
   root to: 'main#index'
   get '*path', to: 'main#index'
+
+  #mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
 end

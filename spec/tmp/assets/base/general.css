@@ -1,0 +1,15 @@
+.heading{
+  padding: 2em 0 0.5em 7.3em;
+  font-size: 2em;
+}
+.heading-small{
+  padding-bottom:0.55em;
+  border-bottom: 0.1em solid black;
+  margin-bottom: 0.3em;
+}
+.push{
+  padding-top:5.5em;
+}
+.searchfield{
+  text-align:center;
+}

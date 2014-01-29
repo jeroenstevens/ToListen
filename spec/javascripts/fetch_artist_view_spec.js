@@ -1,0 +1,3 @@
+describe('FetchArtistsView', function() {
+
+});

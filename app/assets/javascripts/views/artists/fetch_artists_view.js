@@ -1,10 +1,11 @@
 var FetchArtistsView = Backbone.View.extend({
+  el: 'body',
   template: JST['artists/artist_index'],
   url: url = "http://ws.audioscrobbler.com/2.0/?api_key=f90b2e1d432ddfeee9b30524aeedd6d7&format=json", // Last.fm API end-point
 
   events: {
     'keypress input': 'getRandomArtist',
-    'click .artist': 'addToFavorite'
+    'click .artist': 'addArtist'
   },
 
   initialize: function () {
@@ -29,7 +30,6 @@ var FetchArtistsView = Backbone.View.extend({
   },
 
   getRandomArtist: function (e) {
-    console.log("random");
     if(e.which == 13){ // Enter key
       self = this;
       query = $('.searchfield').val()
@@ -67,13 +67,15 @@ var FetchArtistsView = Backbone.View.extend({
     });
   },
 
-  addToFavorite: function (artist) {
+  addArtist: function (artist) {
     console.log("artist click");
+    console.log(this.collection);
+
     var artist_name = (artist["currentTarget"]["textContent"]);
     if(artists.where({name: artist_name}).length == 0){         // Add only when artist_name is unique
       var artist_model = new Artist({name: artist_name});       // Instantiate a new Artist model
       artists.add(artist_model);                                // Add the model to the collection(localStorage)
       artist_model.save();
     }
-  },
+  }
 });

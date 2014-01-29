@@ -1,4 +1,4 @@
-Rails.application.configure do
+ToListen::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on
@@ -26,4 +26,6 @@ Rails.application.configure do
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
   config.assets.debug = true
+
+  config.secret_key_base = '3d0e40676a55b9171a0a9493e0f73b1da249b02c1647aef611fb9cfeb179839b1d900a986eb6cf4e02a533128f70537c5c9c5dde873607fffe8ca3036370c941'
 end
