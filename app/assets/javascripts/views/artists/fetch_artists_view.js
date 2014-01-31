@@ -13,21 +13,21 @@ var FetchArtistsView = Backbone.View.extend({
   },
 
   render: function () {
-    this.getTopArtist();
+    //this.getTopArtist();
   },
 
-  getTopArtist: function () {
-    var self = this;
-    var method = "chart.gettopartists"
-    url = url +"&method="+ method
-    $.getJSON(url, function(data){
-      $('body').append("<ul class='row top-artist-list'></ul>");
-      $.each(data.artists.artist, function(i, artist){
-        var content = self.template({artist: artist, playcount: false, main: false});
-        $('.top-artist-list').append(content);
-      });
-    });
-  },
+  // getTopArtist: function () {
+//     var self = this;
+//     var method = "chart.gettopartists"
+//     url = url +"&method="+ method
+//     $.getJSON(url, function(data){
+//       $('body').append("<ul class='row top-artist-list'></ul>");
+//       $.each(data.artists.artist, function(i, artist){
+//         var content = self.template({artist: artist, playcount: false, main: false});
+//         $('.top-artist-list').append(content);
+//       });
+//     });
+//   },
 
   getRandomArtist: function (e) {
     if(e.which == 13){ // Enter key
@@ -67,15 +67,15 @@ var FetchArtistsView = Backbone.View.extend({
     });
   },
 
-  addArtist: function (artist) {
-    console.log("artist click");
-    console.log(this.collection);
-
-    var artist_name = (artist["currentTarget"]["textContent"]);
-    if(artists.where({name: artist_name}).length == 0){         // Add only when artist_name is unique
-      var artist_model = new Artist({name: artist_name});       // Instantiate a new Artist model
-      artists.add(artist_model);                                // Add the model to the collection(localStorage)
-      artist_model.save();
-    }
-  }
+  // addArtist: function (artist) {
+//     console.log("artist click");
+//     console.log(this.collection);
+//
+//     var artist_name = (artist["currentTarget"]["textContent"]);
+//     if(artists.where({name: artist_name}).length == 0){         // Add only when artist_name is unique
+//       var artist_model = new Artist({name: artist_name});       // Instantiate a new Artist model
+//       artists.add(artist_model);                                // Add the model to the collection(localStorage)
+//       artist_model.save();
+//     }
+//   }
 });

@@ -4,7 +4,7 @@ var ArtistItemView = Backbone.View.extend({
   className: "artist-item",
 
   initialize: function () {
-    this.model.on('change', this.toggleStrikethrough, this);
+    this.model.on('change:listened', this.toggleStrikethrough, this);
   },
   events: {
     "click :checkbox": "toggleListened",
